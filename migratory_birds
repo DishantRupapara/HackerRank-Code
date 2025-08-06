@@ -1,0 +1,41 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'migratoryBirds' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts INTEGER_ARRAY arr as parameter.
+#
+
+def migratoryBirds(arr):
+    # Create a list to count bird sightings (IDs from 1 to 5)
+    count = [0] * 6  # index 0 is unused
+    
+    for bird_id in arr:
+        count[bird_id] += 1
+
+    # Find the bird type with maximum sightings
+    max_count = max(count)
+    
+    for i in range(1, 6):
+        if count[i] == max_count:
+            return i  # Return the smallest ID with max count
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    arr_count = int(input().strip())
+
+    arr = list(map(int, input().rstrip().split()))
+
+    result = migratoryBirds(arr)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
