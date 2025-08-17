@@ -1,0 +1,41 @@
+#!/bin/python3
+
+import os
+import sys
+
+#
+# Complete the 'angryProfessor' function below.
+#
+# The function is expected to return a STRING.
+# The function accepts following parameters:
+#  1. INTEGER k
+#  2. INTEGER_ARRAY a
+#
+
+def angryProfessor(k, a):
+    # Count how many students arrived on time (arrival <= 0)
+    on_time = sum(1 for time in a if time <= 0)
+    
+    # If enough students are on time, class continues ("NO")
+    # Otherwise, class is cancelled ("YES")
+    return "NO" if on_time >= k else "YES"
+
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(input().strip())  # number of test cases
+
+    for t_itr in range(t):
+        first_multiple_input = input().rstrip().split()
+
+        n = int(first_multiple_input[0])  # total students
+        k = int(first_multiple_input[1])  # min required on time
+
+        a = list(map(int, input().rstrip().split()))  # arrival times
+
+        result = angryProfessor(k, a)
+
+        fptr.write(result + '\n')
+
+    fptr.close()
