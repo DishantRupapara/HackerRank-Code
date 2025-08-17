@@ -1,0 +1,37 @@
+#!/bin/python3
+
+import os
+import sys
+
+#
+# Complete the 'hurdleRace' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts following parameters:
+#  1. INTEGER k
+#  2. INTEGER_ARRAY height
+#
+
+def hurdleRace(k, height):
+    # Find the maximum hurdle height
+    max_hurdle = max(height)
+    # If the tallest hurdle is higher than the jump height, return the difference
+    # Otherwise, no doses are needed
+    return max(0, max_hurdle - k)
+
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    first_multiple_input = input().rstrip().split()
+
+    n = int(first_multiple_input[0])   # number of hurdles
+    k = int(first_multiple_input[1])   # maximum height the character can jump naturally
+
+    height = list(map(int, input().rstrip().split()))
+
+    result = hurdleRace(k, height)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
