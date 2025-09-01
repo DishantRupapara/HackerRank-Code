@@ -1,0 +1,44 @@
+#!/bin/python3
+
+import os
+import sys
+
+def queensAttack(n, k, r_q, c_q, obstacles):
+    obstacle_set = {(r, c) for r, c in obstacles}
+    
+    directions = [
+        (1, 0), (-1, 0),
+        (0, 1), (0, -1),
+        (1, 1), (1, -1),
+        (-1, 1), (-1, -1)
+    ]
+    
+    attackable = 0
+    
+    for dr, dc in directions:
+        r, c = r_q, c_q
+        while True:
+            r += dr
+            c += dc
+            if r < 1 or r > n or c < 1 or c > n:
+                break
+            if (r, c) in obstacle_set:
+                break
+            attackable += 1
+    
+    return attackable
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n, k = map(int, input().split())
+    r_q, c_q = map(int, input().split())
+
+    obstacles = []
+    for _ in range(k):
+        obstacles.append(list(map(int, input().split())))
+
+    result = queensAttack(n, k, r_q, c_q, obstacles)
+
+    fptr.write(str(result) + '\n')
+    fptr.close()
