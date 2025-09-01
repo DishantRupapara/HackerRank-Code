@@ -1,0 +1,31 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+def cutTheSticks(arr):
+    result = []
+    arr.sort()
+    
+    while arr:
+        result.append(len(arr))  # number of sticks before cutting
+        min_val = arr[0]
+        arr = [x - min_val for x in arr if x - min_val > 0]
+    
+    return result
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input().strip())
+    arr = list(map(int, input().rstrip().split()))
+
+    result = cutTheSticks(arr)
+
+    fptr.write('\n'.join(map(str, result)))
+    fptr.write('\n')
+
+    fptr.close()
