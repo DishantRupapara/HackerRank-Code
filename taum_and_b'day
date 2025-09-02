@@ -1,0 +1,25 @@
+#!/bin/python3
+
+import os
+import sys
+
+def taumBday(b, w, bc, wc, z):
+    cost_black = min(bc, wc + z)
+    cost_white = min(wc, bc + z)
+    return b * cost_black + w * cost_white
+
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    t = int(input().strip())
+
+    for t_itr in range(t):
+        b, w = map(int, input().split())
+        bc, wc, z = map(int, input().split())
+
+        result = taumBday(b, w, bc, wc, z)
+
+        fptr.write(str(result) + '\n')
+
+    fptr.close()
